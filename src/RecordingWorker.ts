@@ -1,0 +1,1 @@
+import '../../vector-screencast/src/workers/RecordingWorker';
