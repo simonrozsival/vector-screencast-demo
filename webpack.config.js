@@ -34,7 +34,7 @@ module.exports = {
 			},
 			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap') },
 			{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader?sourceMap') },
-			{ test: /\.(woff|svg|ttf|eot)$/, loader:'url?prefix=font/&limit=5000' }
+			{ test: /\.(woff|svg|ttf|eot)\?[0-9]*$/, loader:'url?prefix=font/&limit=5000' }
 		]
 	},	
 	plugins: [ commonsPlugin, new ExtractTextPlugin('stylesheets/vector-screencast.css') ]

@@ -1,4 +1,4 @@
-import AudioServer from '../../vector-screencast-audioserver/src/AudioRecording';
+import AudioServer from '../../vector-screencast/src/AudioRecording';
 
 // init the server
 let server = new AudioServer({	

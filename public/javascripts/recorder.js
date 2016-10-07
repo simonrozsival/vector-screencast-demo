@@ -1,13 +1,13 @@
-webpackJsonp([2],[
-/* 0 */
+webpackJsonp([2],{
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Recorder_1 = __webpack_require__(37);
-	// import Recorder from '../node_modules/vector-screencast/src/lib/Recorder';
+	var Recorder_1 = __webpack_require__(46);
 	// import styles - uses webpack!
-	__webpack_require__(50);
+	__webpack_require__(38);
 	var recorder; // fight the GC!
 	window.onload = function () {
 	    recorder = new Recorder_1['default']("recorder-root", {
@@ -22,63 +22,28 @@ webpackJsonp([2],[
 	};
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */
+
+/***/ 46:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Video_1 = __webpack_require__(31);
-	var Chunk_1 = __webpack_require__(28);
-	var Command_1 = __webpack_require__(26);
-	var DynaDraw_1 = __webpack_require__(38);
-	var SVGDrawer_1 = __webpack_require__(39);
-	var AudioRecorder_1 = __webpack_require__(40);
-	var VideoEvents_1 = __webpack_require__(9);
-	var Errors_1 = __webpack_require__(10);
-	var VideoTimer_1 = __webpack_require__(21);
-	var Metadata_1 = __webpack_require__(36);
-	var Color_1 = __webpack_require__(19);
-	var Brush_1 = __webpack_require__(34);
-	var File_1 = __webpack_require__(29);
-	var IO_1 = __webpack_require__(30);
-	var RecorderUI_1 = __webpack_require__(41);
-	var selectBestInputMethod_1 = __webpack_require__(43);
+	var Video_1 = __webpack_require__(32);
+	var Chunk_1 = __webpack_require__(29);
+	var Command_1 = __webpack_require__(27);
+	var DynaDraw_1 = __webpack_require__(47);
+	var CanvasDrawer_1 = __webpack_require__(23);
+	var AudioRecorder_1 = __webpack_require__(49);
+	var VideoEvents_1 = __webpack_require__(10);
+	var Errors_1 = __webpack_require__(11);
+	var VideoTimer_1 = __webpack_require__(22);
+	var Metadata_1 = __webpack_require__(37);
+	var Color_1 = __webpack_require__(20);
+	var Brush_1 = __webpack_require__(35);
+	var File_1 = __webpack_require__(30);
+	var IO_1 = __webpack_require__(31);
+	var RecorderUI_1 = __webpack_require__(50);
+	var selectBestInputMethod_1 = __webpack_require__(52);
 	/**
 	 * The main class responsible for video recording. Recorder creates all the necessary
 	 * objects and connects them. Recorder captures user's input and actions and stores them
@@ -221,7 +186,7 @@ webpackJsonp([2],[
 	        }).Size;
 	        // the most important part - the rendering and drawing strategy
 	        // - default drawing strategy is using SVG
-	        this.drawer = !!settings.DrawingStrategy ? settings.DrawingStrategy : new SVGDrawer_1['default'](true);
+	        this.drawer = !!settings.DrawingStrategy ? settings.DrawingStrategy : new CanvasDrawer_1['default'](true);
 	        this.drawer.SetEvents(this.events);
 	        this.dynaDraw = new DynaDraw_1['default'](this.events, function () {
 	            return _this.drawer.CreatePath(_this.events);
@@ -238,16 +203,17 @@ webpackJsonp([2],[
 	        container.appendChild(this.ui.GetHTML());
 	        this.drawer.Stretch(); // adapt to the environment
 	        this.pointer = selectBestInputMethod_1['default'](this.events, this.ui.GetHTML(), canvas, this.timer);
-	        // init audio recording
-	        if (!!settings.Audio) {
-	            this.audioRecorder = new AudioRecorder_1['default'](settings.Audio, this.events);
-	            this.audioRecorder.Init();
-	        }
 	        // set default bg color and init the first chunk
 	        this.ClearCanvas(Color_1['default'].BackgroundColor);
 	        // init some values for the brush - user will change it immediately, but some are needed from the very start
 	        this.events.trigger(VideoEvents_1.VideoEventType.ChangeColor, Color_1['default'].ForegroundColor);
 	        this.events.trigger(VideoEvents_1.VideoEventType.ChangeBrushSize, new Brush_1['default'](5));
+	        // init audio recording - this will block the browser, so it is done after
+	        // the canvas is stretched
+	        if (!!settings.Audio) {
+	            this.audioRecorder = new AudioRecorder_1['default'](settings.Audio, this.events);
+	            this.audioRecorder.Init();
+	        }
 	    }
 	    Object.defineProperty(Recorder.prototype, "Events", {
 	        get: function get() {
@@ -448,13 +414,14 @@ webpackJsonp([2],[
 	//}
 
 /***/ },
-/* 38 */
+
+/***/ 47:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Vector_1 = __webpack_require__(17);
-	var VideoEvents_1 = __webpack_require__(9);
+	var Vector_1 = __webpack_require__(18);
+	var VideoEvents_1 = __webpack_require__(10);
 	var DynaDraw = (function () {
 	    function DynaDraw(events, pathFactory, slowSimulation, minBrushSize, maxBrushSize, timer) {
 	        var _this = this;
@@ -675,94 +642,16 @@ webpackJsonp([2],[
 	})();
 
 /***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	var SVG_1 = __webpack_require__(18);
-	var VideoEvents_1 = __webpack_require__(9);
-	var Vector_1 = __webpack_require__(17);
-	var Path_1 = __webpack_require__(23);
-	var SVGDrawer = (function () {
-	    function SVGDrawer(curved) {
-	        if (curved === void 0) {
-	            curved = true;
-	        }
-	        this.curved = curved;
-	    }
-	    SVGDrawer.prototype.SetEvents = function (events) {
-	        this.events = events;
-	    };
-	    SVGDrawer.prototype.CreateCanvas = function () {
-	        this.svg = SVG_1['default'].CreateElement("svg");
-	        var backgroundLayer = SVG_1['default'].CreateElement("g");
-	        this.bg = SVG_1['default'].CreateElement("rect", {
-	            id: "background"
-	        });
-	        backgroundLayer.appendChild(this.bg);
-	        this.svg.appendChild(backgroundLayer);
-	        this.canvas = SVG_1['default'].CreateElement("g", {
-	            id: "canvas"
-	        });
-	        this.svg.appendChild(this.canvas);
-	        return this.svg;
-	    };
-	    SVGDrawer.prototype.Stretch = function () {
-	        var parent = this.svg.parentElement;
-	        var width = parent.clientWidth;
-	        var height = parent.clientHeight;
-	        SVG_1['default'].SetAttributes(this.svg, {
-	            width: width,
-	            height: height
-	        });
-	        SVG_1['default'].SetAttributes(this.bg, {
-	            width: width,
-	            height: height
-	        });
-	        this.events.trigger(VideoEvents_1.VideoEventType.CanvasSize, width, height);
-	    };
-	    SVGDrawer.prototype.ClearCanvas = function (color) {
-	        while (!!this.canvas.firstChild) {
-	            this.canvas.removeChild(this.canvas.firstChild);
-	        }
-	        SVG_1['default'].SetAttributes(this.bg, { fill: color.CssValue });
-	    };
-	    SVGDrawer.prototype.SetCurrentColor = function (color) {
-	        this.currentColor = color;
-	    };
-	    SVGDrawer.prototype.CreatePath = function (events) {
-	        return new Path_1.SvgPath(events, this.curved, this.currentColor.CssValue, this.canvas);
-	    };
-	    SVGDrawer.prototype.SetupOutputCorrection = function (sourceWidth, sourceHeight) {
-	        var wr = this.svg.clientWidth / sourceWidth;
-	        var hr = this.svg.clientHeight / sourceHeight;
-	        var min = Math.min(wr, hr);
-	        SVG_1['default'].SetAttributes(this.svg, {
-	            "viewBox": "0 0 " + sourceWidth + " " + sourceHeight
-	        });
-	        if (min === wr) {
-	            this.events.trigger(VideoEvents_1.VideoEventType.CursorOffset, new Vector_1['default'](0, (this.svg.clientHeight - sourceHeight * min) / 2));
-	        } else {
-	            this.events.trigger(VideoEvents_1.VideoEventType.CursorOffset, new Vector_1['default']((this.svg.clientWidth - sourceWidth * min) / 2, 0));
-	        }
-	        return min;
-	    };
-	    return SVGDrawer;
-	})();
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports['default'] = SVGDrawer;
-
-/***/ },
-/* 40 */
+/***/ 49:
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="audio.d.ts" />
 	'use strict';
 	
-	var VideoEvents_1 = __webpack_require__(9);
-	var Errors_1 = __webpack_require__(10);
-	var AudioPlayer_1 = __webpack_require__(8);
+	var VideoEvents_1 = __webpack_require__(10);
+	var Errors_1 = __webpack_require__(11);
+	var AudioPlayer_1 = __webpack_require__(9);
 	var AudioRecorder = (function () {
 	    function AudioRecorder(config, events) {
 	        var _this = this;
@@ -971,7 +860,8 @@ webpackJsonp([2],[
 	exports['default'] = AudioRecorder;
 
 /***/ },
-/* 41 */
+
+/***/ 50:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -983,13 +873,13 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
-	var HTML_1 = __webpack_require__(11);
-	var HelperFunctions_1 = __webpack_require__(13);
-	var BasicElements_1 = __webpack_require__(14);
-	var Buttons_1 = __webpack_require__(42);
-	var Board_1 = __webpack_require__(15);
-	var Color_1 = __webpack_require__(19);
+	var VideoEvents_1 = __webpack_require__(10);
+	var HTML_1 = __webpack_require__(12);
+	var HelperFunctions_1 = __webpack_require__(14);
+	var BasicElements_1 = __webpack_require__(15);
+	var Buttons_1 = __webpack_require__(51);
+	var Board_1 = __webpack_require__(16);
+	var Color_1 = __webpack_require__(20);
 	var RecorderUI = (function (_super) {
 	    __extends(RecorderUI, _super);
 	    function RecorderUI(id, events) {
@@ -1171,7 +1061,8 @@ webpackJsonp([2],[
 	exports['default'] = RecorderUI;
 
 /***/ },
-/* 42 */
+
+/***/ 51:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1183,9 +1074,9 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var BasicElements_1 = __webpack_require__(14);
-	var VideoEvents_1 = __webpack_require__(9);
-	var HTML_1 = __webpack_require__(11);
+	var BasicElements_1 = __webpack_require__(15);
+	var VideoEvents_1 = __webpack_require__(10);
+	var HTML_1 = __webpack_require__(12);
 	var ChangeColorButton = (function (_super) {
 	    __extends(ChangeColorButton, _super);
 	    function ChangeColorButton(events, color, callback) {
@@ -1251,15 +1142,16 @@ webpackJsonp([2],[
 	exports.ChangeBrushSizeButton = ChangeBrushSizeButton;
 
 /***/ },
-/* 43 */
+
+/***/ 52:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var WacomTablet_1 = __webpack_require__(44);
-	var Pointer_1 = __webpack_require__(47);
-	var AppleForceTouch_1 = __webpack_require__(48);
-	var Touch_1 = __webpack_require__(49);
+	var WacomTablet_1 = __webpack_require__(53);
+	var Pointer_1 = __webpack_require__(56);
+	var AppleForceTouch_1 = __webpack_require__(57);
+	var Touch_1 = __webpack_require__(58);
 	function selectBestInputMethod(events, board, canvas, timer) {
 	    var device;
 	    var wacomApi = WacomTablet_1['default'].IsAvailable();
@@ -1283,7 +1175,8 @@ webpackJsonp([2],[
 	exports['default'] = selectBestInputMethod;
 
 /***/ },
-/* 44 */
+
+/***/ 53:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1295,8 +1188,8 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Mouse_1 = __webpack_require__(45);
-	var HTML_1 = __webpack_require__(11);
+	var Mouse_1 = __webpack_require__(54);
+	var HTML_1 = __webpack_require__(12);
 	var WacomPointerType;
 	(function (WacomPointerType) {
 	    WacomPointerType[WacomPointerType["OutOfProximity"] = 0] = "OutOfProximity";
@@ -1340,7 +1233,8 @@ webpackJsonp([2],[
 	exports['default'] = WacomTablet;
 
 /***/ },
-/* 45 */
+
+/***/ 54:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1352,7 +1246,7 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var PointingDevice_1 = __webpack_require__(46);
+	var PointingDevice_1 = __webpack_require__(55);
 	var Mouse = (function (_super) {
 	    __extends(Mouse, _super);
 	    function Mouse(events, board, timer) {
@@ -1416,13 +1310,14 @@ webpackJsonp([2],[
 	exports["default"] = Mouse;
 
 /***/ },
-/* 46 */
+
+/***/ 55:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var VideoEvents_1 = __webpack_require__(9);
-	var State_1 = __webpack_require__(27);
+	var VideoEvents_1 = __webpack_require__(10);
+	var State_1 = __webpack_require__(28);
 	var PointingDevice = (function () {
 	    function PointingDevice(events, board, timer) {
 	        this.events = events;
@@ -1500,7 +1395,8 @@ webpackJsonp([2],[
 	exports['default'] = PointingDevice;
 
 /***/ },
-/* 47 */
+
+/***/ 56:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1512,7 +1408,7 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var PointingDevice_1 = __webpack_require__(46);
+	var PointingDevice_1 = __webpack_require__(55);
 	var PointerEventsAPI = (function (_super) {
 	    __extends(PointerEventsAPI, _super);
 	    function PointerEventsAPI(events, board, timer) {
@@ -1593,7 +1489,8 @@ webpackJsonp([2],[
 	exports["default"] = PointerEventsAPI;
 
 /***/ },
-/* 48 */
+
+/***/ 57:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1605,7 +1502,7 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Touch_1 = __webpack_require__(49);
+	var Touch_1 = __webpack_require__(58);
 	var AppleForceTouch = (function (_super) {
 	    __extends(AppleForceTouch, _super);
 	    function AppleForceTouch(events, board, canvas, timer) {
@@ -1631,7 +1528,8 @@ webpackJsonp([2],[
 	exports["default"] = AppleForceTouch;
 
 /***/ },
-/* 49 */
+
+/***/ 58:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1643,7 +1541,7 @@ webpackJsonp([2],[
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Mouse_1 = __webpack_require__(45);
+	var Mouse_1 = __webpack_require__(54);
 	var TouchEventsAPI = (function (_super) {
 	    __extends(TouchEventsAPI, _super);
 	    function TouchEventsAPI(events, container, canvas, timer) {
@@ -1713,12 +1611,7 @@ webpackJsonp([2],[
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports["default"] = TouchEventsAPI;
 
-/***/ },
-/* 50 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
 /***/ }
-]);
+
+});
 //# sourceMappingURL=recorder.js.map

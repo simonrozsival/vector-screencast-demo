@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		3:0
+/******/ 		11:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -100,15 +100,16 @@
 /* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="audio.d.ts" />
 	'use strict';
 	
-	var VideoEvents_1 = __webpack_require__(9);
-	var Errors_1 = __webpack_require__(10);
-	var HTML_1 = __webpack_require__(11);
+	var VideoEvents_1 = __webpack_require__(10);
+	var Errors_1 = __webpack_require__(11);
+	var HTML_1 = __webpack_require__(12);
 	(function (AudioSourceType) {
 	    AudioSourceType[AudioSourceType["MP3"] = 0] = "MP3";
 	    AudioSourceType[AudioSourceType["OGG"] = 1] = "OGG";
@@ -335,7 +336,7 @@
 	exports['default'] = AudioPlayer;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	/**
@@ -437,7 +438,7 @@
 	exports["default"] = VideoEvents;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	//namespace VectorScreencast.Helpers {
@@ -492,7 +493,7 @@
 	exports["default"] = Errors;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	//namespace VectorScreencast.Helpers {
@@ -523,8 +524,8 @@
 	exports["default"] = HTML;
 
 /***/ },
-/* 12 */,
-/* 13 */
+/* 13 */,
+/* 14 */
 /***/ function(module, exports) {
 
 	//namespace VectorScreencast.Helpers {
@@ -566,7 +567,7 @@
 	;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -578,7 +579,7 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var HTML_1 = __webpack_require__(11);
+	var HTML_1 = __webpack_require__(12);
 	var SimpleElement = (function () {
 	    function SimpleElement(tag, content) {
 	        if (tag instanceof HTMLElement) {
@@ -756,7 +757,7 @@
 	exports.Panel = Panel;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -768,10 +769,10 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
-	var HTML_1 = __webpack_require__(11);
-	var BasicElements_1 = __webpack_require__(14);
-	var Cursor_1 = __webpack_require__(16);
+	var VideoEvents_1 = __webpack_require__(10);
+	var HTML_1 = __webpack_require__(12);
+	var BasicElements_1 = __webpack_require__(15);
+	var Cursor_1 = __webpack_require__(17);
 	var Board = (function (_super) {
 	    __extends(Board, _super);
 	    function Board(id, events) {
@@ -846,7 +847,7 @@
 	exports['default'] = Board;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -858,11 +859,11 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Vector_1 = __webpack_require__(17);
-	var BasicElements_1 = __webpack_require__(14);
-	var VideoEvents_1 = __webpack_require__(9);
-	var SVG_1 = __webpack_require__(18);
-	var Color_1 = __webpack_require__(19);
+	var Vector_1 = __webpack_require__(18);
+	var BasicElements_1 = __webpack_require__(15);
+	var VideoEvents_1 = __webpack_require__(10);
+	var SVG_1 = __webpack_require__(19);
+	var Color_1 = __webpack_require__(20);
 	var Cursor = (function (_super) {
 	    __extends(Cursor, _super);
 	    function Cursor(events) {
@@ -950,7 +951,7 @@
 	exports['default'] = Cursor;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1034,12 +1035,12 @@
 	exports["default"] = Vector2;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var HelperFunctions_1 = __webpack_require__(13);
+	var HelperFunctions_1 = __webpack_require__(14);
 	var SVG = (function () {
 	    function SVG() {}
 	    Object.defineProperty(SVG, "Namespace", {
@@ -1169,7 +1170,7 @@
 	exports.SVGA = SVGA;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	//namespace VectorScreencast.UI {
@@ -1214,8 +1215,8 @@
 	exports["default"] = Color;
 
 /***/ },
-/* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1266,8 +1267,65 @@
 	exports["default"] = VideoTimer;
 
 /***/ },
-/* 22 */,
 /* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var VideoEvents_1 = __webpack_require__(10);
+	var HTML_1 = __webpack_require__(12);
+	var Path_1 = __webpack_require__(24);
+	var CanvasDrawer = (function () {
+	    function CanvasDrawer(curved) {
+	        if (curved === void 0) {
+	            curved = true;
+	        }
+	        this.curved = curved;
+	    }
+	    CanvasDrawer.prototype.SetEvents = function (events) {
+	        this.events = events;
+	    };
+	    CanvasDrawer.prototype.CreateCanvas = function () {
+	        this.canvas = HTML_1['default'].CreateElement("canvas");
+	        this.context = this.canvas.getContext("2d");
+	        return this.canvas;
+	    };
+	    CanvasDrawer.prototype.Stretch = function () {
+	        var parent = this.canvas.parentElement;
+	        var width = parent.clientWidth;
+	        var height = parent.clientHeight;
+	        this.originalHeight = height;
+	        this.originalWidth = width;
+	        HTML_1['default'].SetAttributes(this.canvas, {
+	            width: width,
+	            height: height
+	        });
+	        this.events.trigger(VideoEvents_1.VideoEventType.CanvasSize, width, height);
+	    };
+	    CanvasDrawer.prototype.SetupOutputCorrection = function (sourceWidth, sourceHeight) {
+	        var wr = this.canvas.width / sourceWidth;
+	        var hr = this.canvas.height / sourceHeight;
+	        var min = Math.min(wr, hr);
+	        this.context.scale(min, min);
+	        return min;
+	    };
+	    CanvasDrawer.prototype.ClearCanvas = function (color) {
+	        this.context.fillStyle = color.CssValue;
+	        this.context.fillRect(0, 0, this.originalWidth, this.originalHeight);
+	    };
+	    CanvasDrawer.prototype.SetCurrentColor = function (color) {
+	        this.currentColor = color;
+	    };
+	    CanvasDrawer.prototype.CreatePath = function (events) {
+	        return new Path_1.CanvasPath(events, this.curved, this.currentColor.CssValue, this.context);
+	    };
+	    return CanvasDrawer;
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports['default'] = CanvasDrawer;
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1279,11 +1337,11 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var SVG_1 = __webpack_require__(18);
-	var Vector_1 = __webpack_require__(17);
-	var VideoEvents_1 = __webpack_require__(9);
-	var Spline_1 = __webpack_require__(24);
-	var Segments_1 = __webpack_require__(25);
+	var SVG_1 = __webpack_require__(19);
+	var Vector_1 = __webpack_require__(18);
+	var VideoEvents_1 = __webpack_require__(10);
+	var Spline_1 = __webpack_require__(25);
+	var Segments_1 = __webpack_require__(26);
 	var Path = (function () {
 	    function Path(events, curved, color, wireframe) {
 	        this.events = events;
@@ -1340,6 +1398,9 @@
 	    Object.defineProperty(Path.prototype, "Color", {
 	        get: function get() {
 	            return this.color;
+	        },
+	        set: function set(value) {
+	            this.color = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -1533,13 +1594,13 @@
 	exports.CanvasPath = CanvasPath;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	///<reference path="./Vector.ts" />
 	"use strict";
 	
-	var Vector_1 = __webpack_require__(17);
+	var Vector_1 = __webpack_require__(18);
 	var Spline = (function () {
 	    function Spline() {}
 	    Spline.catmullRomToBezier = function (a, b, c, d) {
@@ -1604,7 +1665,7 @@
 	exports.BezierCurveSegment = BezierCurveSegment;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1714,7 +1775,7 @@
 	exports.CurvedSegment = CurvedSegment;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1726,8 +1787,8 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
-	var State_1 = __webpack_require__(27);
+	var VideoEvents_1 = __webpack_require__(10);
+	var State_1 = __webpack_require__(28);
 	var Command = (function () {
 	    function Command(time) {
 	        this.time = time;
@@ -1869,7 +1930,7 @@
 	exports.ClearCanvas = ClearCanvas;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1881,7 +1942,7 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Vector_1 = __webpack_require__(17);
+	var Vector_1 = __webpack_require__(18);
 	(function (StateType) {
 	    StateType[StateType["ChangeBrushSize"] = 0] = "ChangeBrushSize";
 	    StateType[StateType["ChangeColor"] = 1] = "ChangeColor";
@@ -1971,7 +2032,7 @@
 	exports.SizeState = SizeState;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1983,7 +2044,7 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
+	var VideoEvents_1 = __webpack_require__(10);
 	var Chunk = (function () {
 	    function Chunk(time, lastErase) {
 	        this.time = time;
@@ -2002,6 +2063,9 @@
 	    Object.defineProperty(Chunk.prototype, "LastErase", {
 	        get: function get() {
 	            return this.lastErase;
+	        },
+	        set: function set(value) {
+	            this.lastErase = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -2113,12 +2177,12 @@
 	exports.EraseChunk = EraseChunk;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var HTML_1 = __webpack_require__(11);
+	var HTML_1 = __webpack_require__(12);
 	var File = (function () {
 	    function File() {}
 	    File.Check = function (req, mimeType) {
@@ -2211,17 +2275,17 @@
 	exports["default"] = File;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Video_1 = __webpack_require__(31);
-	var Chunk_1 = __webpack_require__(28);
-	var ChunkFactories_1 = __webpack_require__(32);
-	var CommandFactories_1 = __webpack_require__(33);
-	var MetadataFactory_1 = __webpack_require__(35);
-	var SVG_1 = __webpack_require__(18);
+	var Video_1 = __webpack_require__(32);
+	var Chunk_1 = __webpack_require__(29);
+	var ChunkFactories_1 = __webpack_require__(33);
+	var CommandFactories_1 = __webpack_require__(34);
+	var MetadataFactory_1 = __webpack_require__(36);
+	var SVG_1 = __webpack_require__(19);
 	var IO = (function () {
 	    function IO() {
 	        this.VideoChunksLayerType = "video-chunks";
@@ -2296,7 +2360,7 @@
 	exports['default'] = IO;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2379,7 +2443,7 @@
 	exports["default"] = Video;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2391,14 +2455,14 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var SVG_1 = __webpack_require__(18);
-	var Vector_1 = __webpack_require__(17);
-	var Chunk_1 = __webpack_require__(28);
-	var Command_1 = __webpack_require__(26);
-	var Path_1 = __webpack_require__(23);
-	var Segments_1 = __webpack_require__(25);
-	var Color_1 = __webpack_require__(19);
-	var Spline_1 = __webpack_require__(24);
+	var SVG_1 = __webpack_require__(19);
+	var Vector_1 = __webpack_require__(18);
+	var Chunk_1 = __webpack_require__(29);
+	var Command_1 = __webpack_require__(27);
+	var Path_1 = __webpack_require__(24);
+	var Segments_1 = __webpack_require__(26);
+	var Color_1 = __webpack_require__(20);
+	var Spline_1 = __webpack_require__(25);
 	var TIME_PRECISION = 2;
 	var ChunkFactory = (function () {
 	    function ChunkFactory(next) {
@@ -2724,7 +2788,7 @@
 	exports.EraseChunkFactory = EraseChunkFactory;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2736,11 +2800,11 @@
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Command_1 = __webpack_require__(26);
-	var SVG_1 = __webpack_require__(18);
-	var HelperFunctions_1 = __webpack_require__(13);
-	var Color_1 = __webpack_require__(19);
-	var Brush_1 = __webpack_require__(34);
+	var Command_1 = __webpack_require__(27);
+	var SVG_1 = __webpack_require__(19);
+	var HelperFunctions_1 = __webpack_require__(14);
+	var Color_1 = __webpack_require__(20);
+	var Brush_1 = __webpack_require__(35);
 	var TIME_PRECISION = 2;
 	var COORDS_PRECISION = 3;
 	var PRESSURE_PRECISION = 4;
@@ -2902,7 +2966,7 @@
 	exports.ClearCanvasFactory = ClearCanvasFactory;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	//namespace VectorScreencast.UI {
@@ -2939,14 +3003,14 @@
 	exports["default"] = BrushSize;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Metadata_1 = __webpack_require__(36);
-	var SVG_1 = __webpack_require__(18);
-	var AudioPlayer_1 = __webpack_require__(8);
+	var Metadata_1 = __webpack_require__(37);
+	var SVG_1 = __webpack_require__(19);
+	var AudioPlayer_1 = __webpack_require__(9);
 	var MetadataFactory = (function () {
 	    function MetadataFactory() {}
 	    MetadataFactory.prototype.FromSVG = function (rootNode) {
@@ -3014,7 +3078,7 @@
 	exports['default'] = MetadataFactory;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3025,6 +3089,12 @@
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports["default"] = Metadata;
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

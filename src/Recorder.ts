@@ -1,8 +1,7 @@
 import Recorder from '../../vector-screencast/src/lib/Recorder';
-// import Recorder from '../node_modules/vector-screencast/src/lib/Recorder';
 
 // import styles - uses webpack!
-import '../../vector-screencast/src/theme/theme.less';
+import '../../vector-screencast/src/theme/theme.less'
 
 var recorder; // fight the GC!
 window.onload = () => {

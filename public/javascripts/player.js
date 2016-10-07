@@ -5,34 +5,37 @@ webpackJsonp([1],{
 
 	'use strict';
 	
-	var Player_1 = __webpack_require__(7);
-	// import Recorder from '../node_modules/vector-screencast/src/lib/Player';
+	var Player_1 = __webpack_require__(8);
+	// import styles - uses webpack!
+	__webpack_require__(38);
 	var player; // fight the GC!
 	window.onload = function () {
 	    var rootId = 'player-root';
 	    var root = document.getElementById(rootId);
 	    player = new Player_1['default'](rootId, {
-	        Source: root.dataset['source']
+	        Source: root.dataset['source'],
+	        Autoplay: true,
+	        ShowControls: true
 	    });
 	};
 
 /***/ },
 
-/***/ 7:
+/***/ 8:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var AudioPlayer_1 = __webpack_require__(8);
-	var VideoEvents_1 = __webpack_require__(9);
-	var Errors_1 = __webpack_require__(10);
-	var PlayerUI_1 = __webpack_require__(12);
-	var VideoTimer_1 = __webpack_require__(21);
-	var CanvasDrawer_1 = __webpack_require__(22);
-	var Command_1 = __webpack_require__(26);
-	var Chunk_1 = __webpack_require__(28);
-	var File_1 = __webpack_require__(29);
-	var IO_1 = __webpack_require__(30);
+	var AudioPlayer_1 = __webpack_require__(9);
+	var VideoEvents_1 = __webpack_require__(10);
+	var Errors_1 = __webpack_require__(11);
+	var PlayerUI_1 = __webpack_require__(13);
+	var VideoTimer_1 = __webpack_require__(22);
+	var CanvasDrawer_1 = __webpack_require__(23);
+	var Command_1 = __webpack_require__(27);
+	var Chunk_1 = __webpack_require__(29);
+	var File_1 = __webpack_require__(30);
+	var IO_1 = __webpack_require__(31);
 	/**
 	 * # Player class.
 	 * This class defines the behavior of the video player. It loads a source file,
@@ -235,6 +238,10 @@ webpackJsonp([1],{
 	        while (!!this.video.CurrentChunk) {
 	            // move to next chunk, if the last one just ended
 	            if (this.video.CurrentChunk.CurrentCommand === undefined) {
+	                if (!!this.drawnPath) {
+	                    // flush the last path
+	                    this.drawnPath.Draw();
+	                }
 	                this.MoveToNextChunk();
 	                // I might have reached the end here
 	                if (!this.video.CurrentChunk || !this.video.CurrentChunk.CurrentCommand) {
@@ -415,7 +422,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 12:
+/***/ 13:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -427,12 +434,12 @@ webpackJsonp([1],{
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
-	var HTML_1 = __webpack_require__(11);
-	var HelperFunctions_1 = __webpack_require__(13);
-	var BasicElements_1 = __webpack_require__(14);
-	var Board_1 = __webpack_require__(15);
-	var TimeLine_1 = __webpack_require__(20);
+	var VideoEvents_1 = __webpack_require__(10);
+	var HTML_1 = __webpack_require__(12);
+	var HelperFunctions_1 = __webpack_require__(14);
+	var BasicElements_1 = __webpack_require__(15);
+	var Board_1 = __webpack_require__(16);
+	var TimeLine_1 = __webpack_require__(21);
 	var PlayerUI = (function (_super) {
 	    __extends(PlayerUI, _super);
 	    function PlayerUI(id, events) {
@@ -640,7 +647,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 20:
+/***/ 21:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -652,9 +659,9 @@ webpackJsonp([1],{
 	    }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var VideoEvents_1 = __webpack_require__(9);
-	var BasicElements_1 = __webpack_require__(14);
-	var HelperFunctions_1 = __webpack_require__(13);
+	var VideoEvents_1 = __webpack_require__(10);
+	var BasicElements_1 = __webpack_require__(15);
+	var HelperFunctions_1 = __webpack_require__(14);
 	var TimeLine = (function (_super) {
 	    __extends(TimeLine, _super);
 	    function TimeLine(id, events) {
@@ -722,65 +729,6 @@ webpackJsonp([1],{
 	})(BasicElements_1.Panel);
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports['default'] = TimeLine;
-
-/***/ },
-
-/***/ 22:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var VideoEvents_1 = __webpack_require__(9);
-	var HTML_1 = __webpack_require__(11);
-	var Path_1 = __webpack_require__(23);
-	var CanvasDrawer = (function () {
-	    function CanvasDrawer(curved) {
-	        if (curved === void 0) {
-	            curved = true;
-	        }
-	        this.curved = curved;
-	    }
-	    CanvasDrawer.prototype.SetEvents = function (events) {
-	        this.events = events;
-	    };
-	    CanvasDrawer.prototype.CreateCanvas = function () {
-	        this.canvas = HTML_1['default'].CreateElement("canvas");
-	        this.context = this.canvas.getContext("2d");
-	        return this.canvas;
-	    };
-	    CanvasDrawer.prototype.Stretch = function () {
-	        var parent = this.canvas.parentElement;
-	        var width = parent.clientWidth;
-	        var height = parent.clientHeight;
-	        this.originalHeight = height;
-	        this.originalWidth = width;
-	        HTML_1['default'].SetAttributes(this.canvas, {
-	            width: width,
-	            height: height
-	        });
-	        this.events.trigger(VideoEvents_1.VideoEventType.CanvasSize, width, height);
-	    };
-	    CanvasDrawer.prototype.SetupOutputCorrection = function (sourceWidth, sourceHeight) {
-	        var wr = this.canvas.width / sourceWidth;
-	        var hr = this.canvas.height / sourceHeight;
-	        var min = Math.min(wr, hr);
-	        this.context.scale(min, min);
-	        return min;
-	    };
-	    CanvasDrawer.prototype.ClearCanvas = function (color) {
-	        this.context.fillStyle = color.CssValue;
-	        this.context.fillRect(0, 0, this.originalWidth, this.originalHeight);
-	    };
-	    CanvasDrawer.prototype.SetCurrentColor = function (color) {
-	        this.currentColor = color;
-	    };
-	    CanvasDrawer.prototype.CreatePath = function (events) {
-	        return new Path_1.CanvasPath(events, this.curved, this.currentColor.CssValue, this.context);
-	    };
-	    return CanvasDrawer;
-	})();
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports['default'] = CanvasDrawer;
 
 /***/ }
 
